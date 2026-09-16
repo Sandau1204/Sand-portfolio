@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uông Sỹ Thắng Anh</title>
+    <title>Uông Sỹ Thắng Anh - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     
     <!-- Google Fonts: Inter cho body, Poppins cho heading -->
@@ -22,7 +22,7 @@
             --surface-color: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --primary: #1221a5; 
+            --primary: #3b82f6; /* Xanh dương chuyên nghiệp */
             --primary-hover: #2563eb;
             --border-color: #e2e8f0;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -36,7 +36,7 @@
             --surface-color: #1e293b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --primary: #1221a5;
+            --primary: #60a5fa;
             --primary-hover: #3b82f6;
             --border-color: #334155;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
@@ -194,12 +194,13 @@
         }
 
         #hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 60px;
+            padding-top: 100px;
+            padding-bottom: 50px;
         }
 
         /* Canvas cho hiệu ứng Plexus */
@@ -623,7 +624,7 @@
             .hero-content {
                 flex-direction: column-reverse;
                 text-align: center;
-                gap: 40px;
+                gap: 25px;
             }
             .hero-text p {
                 margin: 0 auto 30px;
@@ -666,14 +667,33 @@
                 white-space: nowrap;
             }
             .img-wrapper {
-                width: 300px;
-                height: 300px;
+                width: min(260px, 65vw);
+                height: min(260px, 65vw);
+            }
+            .img-wrapper::before {
+                top: 15px;
+                left: 15px;
             }
             .stats-grid {
                 grid-template-columns: 1fr;
             }
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tối ưu hóa cho các thiết bị có chiều cao màn hình nhỏ hoặc quay ngang */
+        @media (max-height: 750px) {
+            #hero {
+                padding-top: 90px;
+                padding-bottom: 40px;
+            }
+            .img-wrapper {
+                width: min(210px, 50vw);
+                height: min(210px, 50vw);
+            }
+            .hero-content {
+                gap: 20px;
             }
         }
 
