@@ -25,6 +25,7 @@
             --primary: #3b82f6; /* Xanh dương chuyên nghiệp */
             --primary-hover: #2563eb;
             --border-color: #e2e8f0;
+            --hero-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, #f8fafc 100%);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
@@ -39,6 +40,7 @@
             --primary: #60a5fa;
             --primary-hover: #3b82f6;
             --border-color: #334155;
+            --hero-bg: linear-gradient(135deg, rgba(30, 58, 138, 0.25) 0%, #0f172a 100%);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
             --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
         }
@@ -201,6 +203,7 @@
             overflow: hidden;
             padding-top: 100px;
             padding-bottom: 50px;
+            background: var(--hero-bg);
         }
 
         /* Canvas cho hiệu ứng Plexus */
@@ -316,6 +319,8 @@
             display: flex;
             justify-content: center;
             position: relative;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         /* Hiệu ứng khung hình vuông chéo cho ảnh */
@@ -323,6 +328,8 @@
             position: relative;
             width: 400px;
             height: 400px;
+            transform: translateZ(0); /* Cố định layer render chống giật / zoom bất ngờ */
+            will-change: auto;
         }
 
         .img-wrapper::before {
@@ -335,7 +342,7 @@
             background-color: var(--primary);
             border-radius: 20px;
             z-index: 1;
-            transition: var(--transition);
+            transition: background-color 0.3s ease; /* Chỉ áp dụng transition cho chuyển đổi màu theme */
         }
 
         .img-wrapper img {
@@ -346,6 +353,8 @@
             position: relative;
             z-index: 2;
             box-shadow: var(--shadow);
+            display: block;
+            pointer-events: none; /* Tránh bị kéo thả hoặc hiệu ứng cảm ứng riêng biệt lên ảnh */
         }
 
         .about-content {
@@ -745,15 +754,15 @@
                 <div class="hero-socials">
                     <a href="https://facebook.com/Sanddeptrai" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://youtube.com/@sanddeptrai" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.linkedin.com/in/s%E1%BB%B9-th%E1%BA%AFng-anh-u%C3%B4ng-530113332/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/Sandau1204" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
 
             <div class="hero-image">
                 <div class="img-wrapper">
                     <!-- Ảnh placeholder, thay URL ảnh của bạn vào src -->
-                    <img src="images/avatar.jpg" alt="Uông Sỹ Thắng Anh">
+                    <img src="images/avatar.jpg" alt="Sand">
                 </div>
             </div>
         </div>
