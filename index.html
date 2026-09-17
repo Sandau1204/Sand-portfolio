@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uông Sỹ Thắng Anh - Portfolio</title>
+    <title>Sand</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     
     <!-- Google Fonts: Inter cho body, Poppins cho heading -->
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS thuần -->
-    <style>
+<style>
         :root {
             /* Light Theme Variables */
             --bg-color: #f8fafc;
@@ -56,18 +56,21 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             transition: background-color 0.3s ease, color 0.3s ease;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
             font-weight: 700;
             color: var(--text-main);
+            letter-spacing: -0.02em;
         }
 
         a {
@@ -129,11 +132,11 @@
         }
 
         .logo {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--primary);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .nav-links {
@@ -180,7 +183,7 @@
         }
         
         .lang-btn {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.9rem;
             font-weight: 700;
         }
@@ -263,7 +266,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             border: none;
         }
 
@@ -394,7 +397,7 @@
             font-size: 3rem;
             font-weight: 800;
             color: var(--primary);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin-bottom: 10px;
         }
 
@@ -717,7 +720,7 @@
 
     <nav id="navbar">
         <div class="container nav-content">
-            <a href="#" class="logo">Sand.</a>
+            <a href="#" class="logo">Sand</a>
             
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about" data-i18n="nav_about">Về tôi</a></li>
@@ -779,15 +782,15 @@
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number" data-target="3">0</div>
+                        <div class="stat-number" data-target="0">0</div>
                         <div class="stat-text" data-i18n="stat_exp">Năm kinh nghiệm</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number" data-target="25">0</div>
+                        <div class="stat-number" data-target="0">0</div>
                         <div class="stat-text" data-i18n="stat_project">Dự án hoàn thành</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-number" data-target="0">0</div>
                         <div class="stat-text" data-i18n="stat_client">Khách hàng hài lòng</div>
                     </div>
                 </div>
@@ -854,15 +857,15 @@
                 <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=AI+Dashboard" alt="Project 1">
+                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=demo" alt="Project 1">
                     </div>
                     <div class="project-content">
-                        <h3 data-i18n="project_1_title">AI Sales Predictor</h3>
-                        <p data-i18n="project_1_desc">Hệ thống dự báo doanh số bán hàng dựa trên dữ liệu lịch sử và các yếu tố ngoại cảnh dùng Machine Learning.</p>
+                        <h3 data-i18n="project_1_title"></h3>
+                        <p data-i18n="project_1_desc"></p>
                         <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Scikit-learn</span>
-                            <span class="tag">React</span>
+                            <span class="tag">#</span>
+                            <span class="tag">#</span>
+                            <span class="tag">#</span>
                         </div>
                         <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;" data-i18n="btn_detail">Xem chi tiết</a>
                     </div>
@@ -871,15 +874,15 @@
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Data+Pipeline" alt="Project 2">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=demo" alt="Project 2">
                     </div>
                     <div class="project-content">
-                        <h3 data-i18n="project_2_title">Real-time Data Pipeline</h3>
-                        <p data-i18n="project_2_desc">Xây dựng luồng xử lý dữ liệu thời gian thực cho hệ thống E-commerce, chịu tải 10,000 requests/s.</p>
+                        <h3 data-i18n="project_2_title"></h3>
+                        <p data-i18n="project_2_desc"></p>
                         <div class="project-tags">
-                            <span class="tag">Kafka</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
+                            <span class="tag">#</span>
+                            <span class="tag">#</span>
+                            <span class="tag">#</span>
                         </div>
                         <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;" data-i18n="btn_detail">Xem chi tiết</a>
                     </div>
@@ -888,15 +891,15 @@
                 <!-- Project 3 -->
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="https://placehold.co/600x400/0f172a/ffffff?text=Fintech+App" alt="Project 3">
+                        <img src="https://placehold.co/600x400/0f172a/ffffff?text=demo" alt="Project 3">
                     </div>
                     <div class="project-content">
-                        <h3 data-i18n="project_3_title">Smart Finance App</h3>
-                        <p data-i18n="project_3_desc">Ứng dụng web quản lý tài chính cá nhân tích hợp AI để phân tích và gợi ý thói quen chi tiêu.</p>
+                        <h3 data-i18n="project_3_title"></h3>
+                        <p data-i18n="project_3_desc"></p>
                         <div class="project-tags">
-                            <span class="tag">Django</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">Docker</span>
+                            <span class="tag">#</span>
+                            <span class="tag">#</span>
+                            <span class="tag">#</span>
                         </div>
                         <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;" data-i18n="btn_detail">Xem chi tiết</a>
                     </div>
@@ -1039,9 +1042,9 @@
                 skill_desc_5: "Javascript, React.js, xây dựng UI tương tác.",
                 skill_desc_6: "Docker, AWS cơ bản, CI/CD pipelines.",
                 projects_title: "Dự án nổi bật",
-                project_1_title: "AI Sales Predictor", project_1_desc: "Hệ thống dự báo doanh số bán hàng dựa trên dữ liệu lịch sử và các yếu tố ngoại cảnh dùng Machine Learning.",
-                project_2_title: "Real-time Data Pipeline", project_2_desc: "Xây dựng luồng xử lý dữ liệu thời gian thực cho hệ thống E-commerce, chịu tải 10,000 requests/s.",
-                project_3_title: "Smart Finance App", project_3_desc: "Ứng dụng web quản lý tài chính cá nhân tích hợp AI để phân tích và gợi ý thói quen chi tiêu.",
+                //project_1_title: "AI Sales Predictor", project_1_desc: "Hệ thống dự báo doanh số bán hàng dựa trên dữ liệu lịch sử và các yếu tố ngoại cảnh dùng Machine Learning.",
+                //project_2_title: "Real-time Data Pipeline", project_2_desc: "Xây dựng luồng xử lý dữ liệu thời gian thực cho hệ thống E-commerce, chịu tải 10,000 requests/s.",
+                //project_3_title: "Smart Finance App", project_3_desc: "Ứng dụng web quản lý tài chính cá nhân tích hợp AI để phân tích và gợi ý thói quen chi tiêu.",
                 btn_detail: "Xem chi tiết",
                 contact_title: "Liên hệ với tôi", contact_subtitle: "Hãy kết nối!",
                 contact_desc: "Tôi luôn cởi mở với các cơ hội hợp tác mới. Hãy để lại tin nhắn nếu bạn có dự án cần hỗ trợ hoặc đơn giản là muốn trao đổi về công nghệ.",
@@ -1065,9 +1068,9 @@
                 skill_desc_5: "Javascript, React.js, building interactive UI.",
                 skill_desc_6: "Docker, Basic AWS, CI/CD pipelines.",
                 projects_title: "Featured Projects",
-                project_1_title: "AI Sales Predictor", project_1_desc: "Sales forecasting system based on historical data and external factors using Machine Learning.",
-                project_2_title: "Real-time Data Pipeline", project_2_desc: "Built real-time data processing flow for E-commerce system, handling 10,000 requests/s.",
-                project_3_title: "Smart Finance App", project_3_desc: "Personal finance management web app integrating AI to analyze and suggest spending habits.",
+                //project_1_title: "AI Sales Predictor", project_1_desc: "Sales forecasting system based on historical data and external factors using Machine Learning.",
+                //project_2_title: "Real-time Data Pipeline", project_2_desc: "Built real-time data processing flow for E-commerce system, handling 10,000 requests/s.",
+                //project_3_title: "Smart Finance App", project_3_desc: "Personal finance management web app integrating AI to analyze and suggest spending habits.",
                 btn_detail: "View Details",
                 contact_title: "Contact Me", contact_subtitle: "Let's Connect!",
                 contact_desc: "I am always open to new collaboration opportunities. Leave a message if you have a project needing support or simply want to chat about tech.",
