@@ -636,11 +636,12 @@
             gap: 12px;
             padding: 14px 20px;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background-color: var(--bg-color);
+            border-radius: 999px;
+            background-color: var(--surface-color);
             color: var(--text-main);
             font-weight: 600;
             white-space: nowrap;
+            box-shadow: var(--shadow);
             transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
