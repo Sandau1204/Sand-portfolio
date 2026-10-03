@@ -160,6 +160,18 @@ const stats: { target: number; label: TranslationKey }[] = [
   { target: 0, label: "stat_client" },
 ];
 
+const technologies = [
+  { name: "Python", icon: "fab fa-python", color: "#3776ab" },
+  { name: "JavaScript", icon: "fab fa-js", color: "#d6a800" },
+  { name: "React", icon: "fab fa-react", color: "#61dafb" },
+  { name: "Node.js", icon: "fab fa-node-js", color: "#539e43" },
+  { name: "Java", icon: "fab fa-java", color: "#e76f00" },
+  { name: "HTML5", icon: "fab fa-html5", color: "#e34f26" },
+  { name: "CSS3", icon: "fab fa-css3-alt", color: "#1572b6" },
+  { name: "Docker", icon: "fab fa-docker", color: "#2496ed" },
+  { name: "Git", icon: "fab fa-git-alt", color: "#f05032" },
+];
+
 function App() {
   const [language, setLanguage] = useState<Language>("vi");
   const [theme, setTheme] = useState<Theme>(() =>
@@ -454,6 +466,29 @@ function App() {
           </div>
         </div>
       </header>
+
+      <aside className="tech-marquee" aria-label="Programming languages and frameworks">
+        <div className="tech-marquee-track">
+          {[0, 1].map((copy) => (
+            <div
+              className="tech-marquee-group"
+              key={copy}
+              aria-hidden={copy === 1}
+            >
+              {technologies.map(({ name, icon, color }) => (
+                <div
+                  className="tech-card"
+                  key={name}
+                  tabIndex={copy === 0 ? 0 : -1}
+                >
+                  <i className={icon} style={{ color }} aria-hidden="true" />
+                  <span>{name}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </aside>
 
       <section id="about">
         <div className="container">
