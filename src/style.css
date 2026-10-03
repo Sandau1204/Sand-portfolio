@@ -183,6 +183,8 @@
         #hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             position: relative;
             overflow: hidden;
@@ -204,6 +206,7 @@
 
         .hero-content {
             display: flex;
+            flex: 1;
             align-items: center;
             justify-content: space-between;
             gap: 50px;
@@ -598,6 +601,8 @@
         }
 
         .tech-marquee {
+            flex: none;
+            width: 100%;
             overflow: hidden;
             padding: 22px 0;
             border-top: 1px solid var(--border-color);

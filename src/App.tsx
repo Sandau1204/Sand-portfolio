@@ -465,30 +465,29 @@ function App() {
             </div>
           </div>
         </div>
+        <aside className="tech-marquee" aria-label="Programming languages and frameworks">
+          <div className="tech-marquee-track">
+            {[0, 1].map((copy) => (
+              <div
+                className="tech-marquee-group"
+                key={copy}
+                aria-hidden={copy === 1}
+              >
+                {technologies.map(({ name, icon, color }) => (
+                  <div
+                    className="tech-card"
+                    key={name}
+                    tabIndex={copy === 0 ? 0 : -1}
+                  >
+                    <i className={icon} style={{ color }} aria-hidden="true" />
+                    <span>{name}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </aside>
       </header>
-
-      <aside className="tech-marquee" aria-label="Programming languages and frameworks">
-        <div className="tech-marquee-track">
-          {[0, 1].map((copy) => (
-            <div
-              className="tech-marquee-group"
-              key={copy}
-              aria-hidden={copy === 1}
-            >
-              {technologies.map(({ name, icon, color }) => (
-                <div
-                  className="tech-card"
-                  key={name}
-                  tabIndex={copy === 0 ? 0 : -1}
-                >
-                  <i className={icon} style={{ color }} aria-hidden="true" />
-                  <span>{name}</span>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </aside>
 
       <section id="about">
         <div className="container">
