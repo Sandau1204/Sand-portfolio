@@ -449,7 +449,7 @@ function App() {
           </div>
           <div className="hero-image">
             <div className="img-wrapper">
-              <img src="/images/avatar.jpg" alt="Sand" />
+              <img src={`${import.meta.env.BASE_URL}images/avatar.jpg`} alt="Sand" />
             </div>
           </div>
         </div>
