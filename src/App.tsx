@@ -160,16 +160,23 @@ const stats: { target: number; label: TranslationKey }[] = [
   { target: 0, label: "stat_client" },
 ];
 
+const deviconBaseUrl =
+  "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
+
 const technologies = [
-  { name: "Python", icon: "fab fa-python", color: "#3776ab" },
-  { name: "JavaScript", icon: "fab fa-js", color: "#d6a800" },
-  { name: "React", icon: "fab fa-react", color: "#61dafb" },
-  { name: "Node.js", icon: "fab fa-node-js", color: "#539e43" },
-  { name: "Java", icon: "fab fa-java", color: "#e76f00" },
-  { name: "HTML5", icon: "fab fa-html5", color: "#e34f26" },
-  { name: "CSS3", icon: "fab fa-css3-alt", color: "#1572b6" },
-  { name: "Docker", icon: "fab fa-docker", color: "#2496ed" },
-  { name: "Git", icon: "fab fa-git-alt", color: "#f05032" },
+  { name: "Python", logo: `${deviconBaseUrl}/python/python-original.svg` },
+  {
+    name: "JavaScript",
+    logo: `${deviconBaseUrl}/javascript/javascript-original.svg`,
+  },
+  { name: "React", logo: `${deviconBaseUrl}/react/react-original.svg` },
+  { name: "Node.js", logo: `${deviconBaseUrl}/nodejs/nodejs-original.svg` },
+  { name: "Java", logo: `${deviconBaseUrl}/java/java-original.svg` },
+  { name: "HTML5", logo: `${deviconBaseUrl}/html5/html5-original.svg` },
+  { name: "CSS3", logo: `${deviconBaseUrl}/css3/css3-original.svg` },
+  { name: "Docker", logo: `${deviconBaseUrl}/docker/docker-original.svg` },
+  { name: "Git", logo: `${deviconBaseUrl}/git/git-original.svg` },
+  { name: "figma", logo: `${deviconBaseUrl}/figma/figma-original.svg` },
 ];
 
 function App() {
@@ -473,13 +480,13 @@ function App() {
                 key={copy}
                 aria-hidden={copy === 1}
               >
-                {technologies.map(({ name, icon, color }) => (
+                {technologies.map(({ name, logo }) => (
                   <div
                     className="tech-card"
                     key={name}
                     tabIndex={copy === 0 ? 0 : -1}
                   >
-                    <i className={icon} style={{ color }} aria-hidden="true" />
+                    <img src={logo} alt="" aria-hidden="true" />
                     <span>{name}</span>
                   </div>
                 ))}

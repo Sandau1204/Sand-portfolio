@@ -604,7 +604,7 @@
             flex: none;
             width: 100%;
             overflow: hidden;
-            padding: 22px 0;
+            padding: 25px 0;
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             background-color: var(--surface-color);
@@ -630,16 +630,16 @@
 
         .tech-card {
             display: flex;
-            min-width: 150px;
+            min-width: 130px;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 14px 20px;
+            padding: 7px 20px;
             border: 1px solid var(--border-color);
             border-radius: 999px;
             background-color: var(--surface-color);
             color: var(--text-main);
-            font-weight: 600;
+            font-weight: 300;
             white-space: nowrap;
             box-shadow: var(--shadow);
             transition: border-color 0.2s ease, transform 0.2s ease;
@@ -652,8 +652,10 @@
             outline: none;
         }
 
-        .tech-card i {
-            font-size: 1.5rem;
+        .tech-card img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
         }
 
         @keyframes tech-marquee-scroll {
@@ -697,6 +699,9 @@
                 flex-direction: column-reverse;
                 text-align: center;
                 gap: 25px;
+            }
+            .tech-marquee {
+                margin-top: 32px;
             }
             .hero-text p {
                 margin: 0 auto 30px;
