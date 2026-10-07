@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { flushSync } from "react-dom";
 
 type Language = "vi" | "en";
 type Theme = "light" | "dark";
@@ -155,11 +156,10 @@ const projects = [
 ] satisfies { image: string; title: TranslationKey; description: TranslationKey }[];
 
 const stats: { target: number; label: TranslationKey }[] = [
-  { target: 0, label: "stat_exp" },
-  { target: 0, label: "stat_project" },
-  { target: 0, label: "stat_client" },
+  { target: 3, label: "stat_exp" },
+  { target: 99, label: "stat_project" },
+  { target: 20, label: "stat_client" },
 ];
-
 const deviconBaseUrl =
   "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
 
@@ -185,13 +185,82 @@ function App() {
     localStorage.getItem("theme") === "dark" ? "dark" : "light",
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [counterValues, setCounterValues] = useState(() =>
     stats.map(({ target }) => String(target)),
   );
   const formRef = useRef<HTMLFormElement>(null);
+  const marqueeRef = useRef<HTMLElement>(null);
+  const marqueeGroupRef = useRef<HTMLDivElement>(null);
+  const [techRepeats, setTechRepeats] = useState(2);
+  const themeTransitionRunning = useRef(false);
+
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    const group = marqueeGroupRef.current;
+    if (!marquee || !group) return;
+
+    const resize = new ResizeObserver(() => {
+      // Animate one fixed sequence; extra copies only fill the viewport.
+      // Resizing must not change the animation distance or its playback time.
+      const sequenceWidth = group.getBoundingClientRect().width;
+      if (sequenceWidth > 0) {
+        marquee.style.setProperty("--marquee-distance", `${-sequenceWidth}px`);
+        marquee.style.setProperty("--marquee-duration", `${sequenceWidth / 40}s`);
+        setTechRepeats(Math.max(2, Math.ceil(marquee.clientWidth / sequenceWidth) + 1));
+      }
+    });
+    resize.observe(marquee);
+    resize.observe(group);
+    return () => resize.disconnect();
+  }, []);
+
+  const toggleTheme = async (button: HTMLButtonElement) => {
+    if (themeTransitionRunning.current) return;
+
+    const nextTheme = theme === "light" ? "dark" : "light";
+    const applyTheme = () => {
+      flushSync(() => setTheme(nextTheme));
+      document.documentElement.dataset.theme = nextTheme;
+    };
+    if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      applyTheme();
+      return;
+    }
+
+    const bounds = button.getBoundingClientRect();
+    const x = bounds.left + bounds.width / 2;
+    const y = bounds.top + bounds.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+
+    themeTransitionRunning.current = true;
+    document.documentElement.classList.add("theme-transition");
+    try {
+      const transition = document.startViewTransition(applyTheme);
+      // A skipped transition still applies the theme but may reject `ready`.
+      await transition.ready;
+      await document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        {
+          duration: 650,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          pseudoElement: "::view-transition-new(root)",
+          fill: "forwards",
+        },
+      ).finished;
+      await transition.finished;
+    } catch {
+      applyTheme();
+    } finally {
+      document.documentElement.classList.remove("theme-transition");
+      themeTransitionRunning.current = false;
+    }
+  };
 
   const t = (key: TranslationKey) => translations[language][key];
 
@@ -201,7 +270,14 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const updateScroll = () => setScrolled(window.scrollY > 50);
+    let previousY = Math.max(0, window.scrollY);
+    const updateScroll = () => {
+      const currentY = Math.max(0, window.scrollY);
+      if (Math.abs(currentY - previousY) < 6) return;
+
+      setNavHidden(currentY > previousY);
+      previousY = currentY;
+    };
 
     updateScroll();
     window.addEventListener("scroll", updateScroll, { passive: true });
@@ -298,14 +374,14 @@ function App() {
     const createParticles = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      const count = Math.floor((canvas.width * canvas.height) / 9000);
+      const count = Math.floor((canvas.width * canvas.height) / 7500);
 
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        speedX: (Math.random() * 2 - 1) * 0.25,
-        speedY: (Math.random() * 2 - 1) * 0.25,
+        size: Math.random() * 1.5 + 1.5,
+        speedX: (Math.random() * 2 - 1) * 0.3,
+        speedY: (Math.random() * 2 - 1) * 0.3,
       }));
     };
 
@@ -328,7 +404,7 @@ function App() {
 
         context.beginPath();
         context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        context.fillStyle = `${color}0.5)`;
+        context.fillStyle = `${color}0.8)`;
         context.fill();
 
         for (let otherIndex = index + 1; otherIndex < particles.length; otherIndex++) {
@@ -337,10 +413,10 @@ function App() {
             particle.x - other.x,
             particle.y - other.y,
           );
-          if (distance >= 120) continue;
+          if (distance >= 150) continue;
 
           context.beginPath();
-          context.strokeStyle = `${color}${(1 - distance / 120) * 0.2})`;
+          context.strokeStyle = `${color}${(1 - distance / 150) * 0.35})`;
           context.lineWidth = 1;
           context.moveTo(particle.x, particle.y);
           context.lineTo(other.x, other.y);
@@ -369,10 +445,10 @@ function App() {
 
   return (
     <>
-      <nav id="navbar" className={scrolled ? "scrolled" : ""}>
+      <nav id="navbar" className={navHidden && !menuOpen ? "nav-hidden" : ""}>
         <div className="container nav-content">
           <a href="#" className="logo" onClick={() => setMenuOpen(false)}>
-            Sand
+            Sanddeptraivaicalol
           </a>
           <ul className={`nav-links${menuOpen ? " active" : ""}`}>
             {(["about", "skills", "projects", "contact"] as const).map(
@@ -400,14 +476,9 @@ function App() {
               className="icon-btn"
               title="Chế độ Sáng/Tối"
               aria-label="Toggle color theme"
-              onClick={() =>
-                setTheme((current) => (current === "light" ? "dark" : "light"))
-              }
+              onClick={(event) => void toggleTheme(event.currentTarget)}
             >
-              <i
-                className={`fas fa-${theme === "light" ? "moon" : "sun"}`}
-                aria-hidden="true"
-              />
+              <i className={`fas fa-${theme === "light" ? "moon" : "sun"}`} aria-hidden="true" />
             </button>
             <button
               className="mobile-menu-btn"
@@ -415,10 +486,7 @@ function App() {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
             >
-              <i
-                className={`fas fa-${menuOpen ? "times" : "bars"}`}
-                aria-hidden="true"
-              />
+              <i className={`fas fa-${menuOpen ? "times" : "bars"}`} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -433,9 +501,11 @@ function App() {
             <p>{t("hero_tagline")}</p>
             <div className="hero-buttons">
               <a href="#projects" className="btn btn-primary">
+                <i className="fas fa-folder-open" aria-hidden="true" />
                 {t("btn_projects")}
               </a>
               <a href="#contact" className="btn btn-outline">
+                <i className="fas fa-envelope" aria-hidden="true" />
                 {t("btn_contact")}
               </a>
             </div>
@@ -458,10 +528,22 @@ function App() {
               >
                 <i className="fab fa-youtube" aria-hidden="true" />
               </a>
-              <a href="#" target="_blank" rel="noreferrer" title="LinkedIn">
+              <a
+                href="https://www.linkedin.com/in/sanddeptrai/"
+                target="_blank"
+                rel="noreferrer"
+                title="LinkedIn"
+                aria-label="LinkedIn"
+              >
                 <i className="fab fa-linkedin-in" aria-hidden="true" />
               </a>
-              <a href="#" target="_blank" rel="noreferrer" title="GitHub">
+              <a
+                href="https://github.com/Sandau1204"
+                target="_blank"
+                rel="noreferrer"
+                title="GitHub"
+                aria-label="GitHub"
+              >
                 <i className="fab fa-github" aria-hidden="true" />
               </a>
             </div>
@@ -472,13 +554,14 @@ function App() {
             </div>
           </div>
         </div>
-        <aside className="tech-marquee" aria-label="Programming languages and frameworks">
+        <aside ref={marqueeRef} className="tech-marquee" aria-label="Programming languages and frameworks">
           <div className="tech-marquee-track">
-            {[0, 1].map((copy) => (
+            {Array.from({ length: techRepeats }, (_, copy) => (
               <div
                 className="tech-marquee-group"
+                ref={copy === 0 ? marqueeGroupRef : undefined}
                 key={copy}
-                aria-hidden={copy === 1}
+                aria-hidden={copy > 0}
               >
                 {technologies.map(({ name, logo }) => (
                   <div
